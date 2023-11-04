@@ -1,0 +1,403 @@
+VACUMM CLEANER:
+
+def clean(floor):
+  i, j, row, col = 0, 0, len(floor), len(floor [0])
+  for i in range (row):
+    if (i%2 == 0):
+      for j in range (col):
+        if(floor [i][j] == 1) :
+          print_F(floor, i, j)
+          floor[i] [j] = 0
+        print_F(floor, i, j)
+    else:
+      for j in range(col-1, -1, -1):
+        if(floor [i][i] == 1):
+          print_F(floor, i, j)
+          floor[i][i] = 0
+        print_F(floor, i, j)
+[ ]
+def print_F(floor, row, col):
+  """A function to print the GRID , (row, col) represent the current vacuum cleaner position"""
+  print("The Floor matrix is as below:")
+  for r in range(len (floor)):
+    for c in range(len(floor[r])):
+      if r == row and c == col:
+        print(f" ›{floor [r][c]}‹ ", end = "")
+      else:
+        print(f"  {floor [r][c]}  ", end = "")
+    print (end ='\n')
+  print(end = '\n')
+def main():
+  floor = []
+  m = int (input("Enter the No. of Rows: "))
+  n = int (input ("Enter the No. of Columns: "))
+  print("Enter clean status for each cell (1 - dirty, 0 - clean)")
+  for i in range(m):
+    f = list (map(int,(input().split(" "))))
+    floor.append(f)
+  print()
+  clean (floor)
+main()
+account_circle
+Enter the No. of Rows: 3
+Enter the No. of Columns: 2
+Enter clean status for each cell (1 - dirty, 0 - clean)
+1 0
+0 1
+1 1
+
+The Floor matrix is as below:
+ ›1‹   0  
+  0    1  
+  1    1  
+
+The Floor matrix is as below:
+ ›0‹   0  
+  0    1  
+  1    1  
+
+The Floor matrix is as below:
+  0   ›0‹ 
+  0    1  
+  1    1  
+
+The Floor matrix is as below:
+  0    0  
+  0   ›1‹ 
+  1    1  
+
+The Floor matrix is as below:
+  0    0  
+  0   ›0‹ 
+  1    1  
+
+The Floor matrix is as below:
+  0    0  
+ ›0‹   0  
+  1    1  
+
+The Floor matrix is as below:
+  0    0  
+  0    0  
+ ›1‹   1  
+
+The Floor matrix is as below:
+  0    0  
+  0    0  
+ ›0‹   1  
+
+The Floor matrix is as below:
+  0    0  
+  0    0  
+  0   ›1‹ 
+
+The Floor matrix is as below:
+  0    0  
+  0    0  
+  0   ›0‹ 
+WATER JUG:
+
+print("initial state = (0,0)")
+print("Goal state = (2,0)")
+x = 0
+y = 0
+m=4
+n=3
+while(x != 2):
+n = int(input("enter the rule"))
+if(n == 1):  
+  x = 4   
+ print(x,y) 
+ elif(n == 2):  
+  y = 3  
+  print(x,y) 
+ elif(n == 3):  
+  x = 0 
+   print(x,y) 
+ elif(n == 4):  
+  y = 0  
+  print(x,y) 
+ elif(n == 5):    
+x = x-(3-y)  
+  y = 3  
+  print(x,y) 
+ elif(n == 6): 
+   y = y-(4-x) 
+   x = 4   
+ print(x,y) 
+ elif(n == 7): 
+   y = x + y 
+   x = 0  
+  print(x,y) 
+ elif(n == 8): 
+   x = x + y  
+  y = 0  
+  print(x,y)
+
+enter the rule2
+0 3
+enter the rule8
+3 0
+enter the rule2
+3 3
+enter the rule6
+4 2
+enter the rule3
+0 2
+enter the rule8
+2 0
+
+
+  1.monkey and  problem 
+        on(floor,monkey).
+        on(floor,chair).
+        in(room,monkey).
+        in(room,chair).
+in(room,banana).
+at(ceiling,banana).            
+strong(monkey).
+grasp(monkey).
+climb(monkey,chair).        
+push(monkey,chair):-
+    strong(monkey).        
+under(banana,chair):-
+    push(monkey,chair).   
+canreach(banana,monkey):-
+    at(floor,banana);  
+    at(ceiling,banana),
+    under(banana,chair),
+    climb(monkey,chair).            
+canget(banana,monkey):-
+canreach(banana,monkey),grasp(monkey).
+
+2. breadth first search
+def shortest_path(graph, node1, node2):
+    path_list = [[node1]]
+    path_index = 0
+    
+    previous_nodes = {node1}
+    if node1 == node2:
+        return path_list[0]
+        
+    while path_index < len(path_list):
+        current_path = path_list[path_index]
+        last_node = current_path[-1]
+        next_nodes = graph[last_node]
+   
+        if node2 in next_nodes:
+            current_path.append(node2)
+            return current_path
+       
+        for next_node in next_nodes:
+            if not next_node in previous_nodes:
+                new_path = current_path[:]
+                new_path.append(next_node)
+                path_list.append(new_path)
+           
+                previous_nodes.add(next_node)
+       
+        path_index += 1
+   
+    return []
+graph = {
+    1:{2,5},
+    2:{1,3,5},
+    3:{2,4},
+    4:{3,5,6},
+    5:{1,2,4},
+    6:{4}
+}
+print("The shortest path = ",shortest_path(graph,1,6))
+1
+{2, 5}
+[1]
+[1]
+2
+{1, 3, 5}
+[1, 2]
+5
+{1, 2, 4}
+[1, 5]
+3
+{2, 4}
+4
+{3, 5, 6}
+[1, 5, 4]
+[1, 5, 4, 6]
+[1, 5, 4, 6]
+
+TIC TAC TOE:
+import numpy as np
+import random
+from time import sleep
+
+def create_board():
+	return(np.array([[0, 0, 0],
+					[0, 0, 0],
+					[0, 0, 0]]))
+
+def possibilities(board):
+	l = []
+
+	for i in range(len(board)):
+		for j in range(len(board)):
+
+			if board[i][j] == 0:
+				l.append((i, j))
+	return(l)
+
+
+def random_place(board, player):
+	selection = possibilities(board)
+	current_loc = random.choice(selection)
+	board[current_loc] = player
+	return(board)
+
+
+def row_win(board, player):
+	for x in range(len(board)):
+		win = True
+
+		for y in range(len(board)):
+			if board[x, y] != player:
+				win = False
+				continue
+
+		if win == True:
+			return(win)
+	return(win)
+
+
+def col_win(board, player):
+	for x in range(len(board)):
+		win = True
+
+		for y in range(len(board)):
+			if board[y][x] != player:
+				win = False
+				continue
+
+		if win == True:
+			return(win)
+	return(win)
+
+
+def diag_win(board, player):
+	win = True
+	y = 0
+	for x in range(len(board)):
+		if board[x, x] != player:
+			win = False
+	if win:
+		return win
+	win = True
+	if win:
+		for x in range(len(board)):
+			y = len(board) - 1 - x
+			if board[x, y] != player:
+				win = False
+	return win
+
+
+def evaluate(board):
+	winner = 0
+
+	for player in [1, 2]:
+		if (row_win(board, player) or
+				col_win(board, player) or
+				diag_win(board, player)):
+
+			winner = player
+
+	if np.all(board != 0) and winner == 0:
+		winner = -1
+	return winner
+
+
+def play_game():
+	board, winner, counter = create_board(), 0, 1
+	print(board)
+	sleep(2)
+
+	while winner == 0:
+		for player in [1, 2]:
+			board = random_place(board, player)
+			print("Board after " + str(counter) + " move")
+			print(board)
+			sleep(2)
+			counter += 1
+			winner = evaluate(board)
+			if winner != 0:
+				break
+	return(winner)
+
+print("Winner is: " + str(play_game()))
+
+8 PUZZLE:
+
+class Solution:
+    def solve(self, board):
+        dict = {}
+        flatten = []
+        for i in range(len(board)):
+            flatten += board[i]
+        flatten = tuple(flatten)
+
+        dict[flatten] = 0
+
+        if flatten == (0, 1, 2, 3, 4, 5, 6, 7, 8):
+            return 0
+
+        return self.get_paths(dict)
+
+    def get_paths(self, dict):
+        cnt = 0
+        while True:
+            current_nodes = [x for x in dict if dict[x] == cnt]
+            if len(current_nodes) == 0:
+                return -1
+
+            for node in current_nodes:
+                next_moves = self.find_next(node)
+                for move in next_moves:
+                    if move not in dict:
+                        dict[move] = cnt + 1
+                    if move == (0, 1, 2, 3, 4, 5, 6, 7, 8):
+                        return cnt + 1
+            cnt += 1
+
+    def find_next(self, node):
+        moves = {
+            0: [1, 3],
+            1: [0, 2, 4],
+            2: [1, 5],
+            3: [0, 4, 6],
+            4: [1, 3, 5, 7],
+            5: [2, 4, 8],
+            6: [3, 7],
+            7: [4, 6, 8],
+            8: [5, 7],
+        }
+
+        results = []
+        pos_0 = node.index(0)
+        for move in moves[pos_0]:
+            new_node = list(node)
+            new_node[move], new_node[pos_0] = new_node[pos_0], new_node[move]
+            results.append(tuple(new_node))
+
+        return results
+ob = Solution()
+matrix = [
+    [3, 1, 2],
+    [4, 7, 5],
+    [6, 8, 0]
+]
+print(ob.solve(matrix))
+{(3, 1, 2, 4, 7, 5, 6, 8, 0): 0}
+{(3, 1, 2, 4, 7, 5, 6, 8, 0): 0, (3, 1, 2, 4, 7, 0, 6, 8, 5): 1, (3, 1, 2, 4, 7, 5, 6, 0, 8): 1}
+{(3, 1, 2, 4, 7, 5, 6, 8, 0): 0, (3, 1, 2, 4, 7, 0, 6, 8, 5): 1, (3, 1, 2, 4, 7, 5, 6, 0, 8): 1, (3, 1, 0, 4, 7, 2, 6, 8, 5): 2, (3, 1, 2, 4, 0, 7, 6, 8, 5): 2, (3, 1, 2, 4, 0, 5, 6, 7, 8): 2, (3, 1, 2, 4, 7, 5, 0, 6, 8): 2}
+{(3, 1, 2, 4, 7, 5, 6, 8, 0): 0, (3, 1, 2, 4, 7, 0, 6, 8, 5): 1, (3, 1, 2, 4, 7, 5, 6, 0, 8): 1, (3, 1, 0, 4, 7, 2, 6, 8, 5): 2, (3, 1, 2, 4, 0, 7, 6, 8, 5): 2, (3, 1, 2, 4, 0, 5, 6, 7, 8): 2, (3, 1, 2, 4, 7, 5, 0, 6, 8): 2, (3, 0, 1, 4, 7, 2, 6, 8, 5): 3, (3, 0, 2, 4, 1, 7, 6, 8, 5): 3, (3, 1, 2, 0, 4, 7, 6, 8, 5): 3, (3, 1, 2, 4, 8, 7, 6, 0, 5): 3, (3, 0, 2, 4, 1, 5, 6, 7, 8): 3, (3, 1, 2, 0, 4, 5, 6, 7, 8): 3, (3, 1, 2, 4, 5, 0, 6, 7, 8): 3, (3, 1, 2, 0, 7, 5, 4, 6, 8): 3}
+4
+
+
